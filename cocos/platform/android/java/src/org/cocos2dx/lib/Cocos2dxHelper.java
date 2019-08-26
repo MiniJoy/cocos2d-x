@@ -55,6 +55,7 @@ import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
+import android.text.TextUtils;
 
 import com.android.vending.expansion.zipfile.APKExpansionSupport;
 import com.android.vending.expansion.zipfile.ZipResourceFile;
@@ -81,6 +82,10 @@ public class Cocos2dxHelper {
     private static final String PREFS_NAME = "Cocos2dxPrefsFile";
     private static final int RUNNABLES_PER_FRAME = 5;
     private static final String TAG = Cocos2dxHelper.class.getSimpleName();
+
+    public static final String SEARCH_PATH = "search_path";
+
+    public static final String XXTEA_KEY = "xxtea_key";
 
     // ===========================================================
     // Fields
@@ -121,6 +126,11 @@ public class Cocos2dxHelper {
     public static void init(final Activity activity) {
         sActivity = activity;
         Cocos2dxHelper.sCocos2dxHelperListener = (Cocos2dxHelperListener)activity;
+        String searchPath = activity.getIntent().getStringExtra(SEARCH_PATH);
+        if (!TextUtils.isEmpty(searchPath)) {
+            nativeAddSearchPath(searchPath);
+        }
+        
         if (!sInited) {
 
             PackageManager pm = activity.getPackageManager();
@@ -267,6 +277,11 @@ public class Cocos2dxHelper {
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * 添加资源搜索路径
+     */
+    private static native void nativeAddSearchPath(final String path);
 
     private static native void nativeSetEditTextDialogResult(final byte[] pBytes);
 

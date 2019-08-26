@@ -82,6 +82,10 @@ extern "C" {
         }
     }
 
+    JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxHelper_nativeAddSearchPath(JNIEnv*  env, jobject thiz, jstring path) {
+        FileUtils::getInstance()->addSearchPath(JniHelper::jstring2string(path));
+    }
+
 }
 
 const char * getApkPath() {

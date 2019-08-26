@@ -22,6 +22,9 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
+*.classpath
+*.project
+.settings/
 [Bb]in
 [Dd]ebug/
 [Dd]ebug.win32/
